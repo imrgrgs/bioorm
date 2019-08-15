@@ -1,0 +1,35 @@
+{
+	"keywords" : [
+		"pdo",
+		"fluent query",
+		"mysql",
+		"sqlite",
+		"postgresql",
+		"orm",
+		"php",
+		"bitio",
+		"inforsolutions",
+		"bitgroup"
+	],
+	"autoload" : {
+		"psr-4" : {
+			"bioorm\\" : "src"
+		}
+	},
+	"name" : "imrgrgs/bioorm",
+	"type" : "library",
+	"description" : "BioOrm is a micro-ORM which functions as both a fluent select query API and a CRUD model class.",
+	"license" : "MIT",
+	"require" : {
+		"php" : ">=5.6"
+	},
+	"homepage" : "http://www.bitio.com.br",
+	"minimum-stability" : "dev",
+	"authors" : [{
+			"name" : "BitIO",
+			"email" : "development@bitgroup.com.br",
+			"homepage" : "http://www.bitio.com.br",
+			"role" : "Admin"
+		}
+	]
+}
