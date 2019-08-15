@@ -17,7 +17,7 @@ Requirements: PHP >= 5.6, PDO
 
 ---
 
-## About Voodoo!
+## About BioOrm!
 
 BioOrm is a micro-ORM which functions as both a fluent select query API and a CRUD model class.
 
