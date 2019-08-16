@@ -483,12 +483,12 @@ abstract class Model extends BioOrm
      * @param string $args
      * @return Mixed
      */
-    public function __call($association, $args)
+    public function __call($association, $args=[])
     {
         $cldCls = get_called_class();
         if (isset(self::$associations[$cldCls]) && isset(self::$associations[$cldCls][$association])) {
             $assoc = self::$associations[$cldCls][$association];
-            if ($args[0]) {
+            if (isset($args[0])) {
                 if (is_string($args[0])) {
                     $assoc["where"] = [
                         $args[0]
