@@ -1355,7 +1355,7 @@ class BioOrm implements IteratorAggregate
                              if ($prop["columns"]) {
                                  $model->select($prop["columns"]);
                              }
-                             
+                             $callback = $prop["callback"];
                              self::$references[$token] = $model->find(function($rows) use ($model, $callback, $foreignKeyN) {
                                  $results = [];
                                  foreach ($rows as $row) {
