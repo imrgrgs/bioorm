@@ -189,7 +189,21 @@ abstract class Model extends BioOrm
      * @var string
      */
     protected $foreignKeyName = "%s_id";
-
+    
+    /**
+     * The unique keys names 
+     *
+     * @var string
+     */
+    protected $uniqueKeys = [];
+    
+    /**
+     * The required fields names
+     *
+     * @var string
+     */
+    protected $requiredsFields = [];
+    
     /**
      * The DB Alias to use.
      * It is saved in App/Config/DB.ini
