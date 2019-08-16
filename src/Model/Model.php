@@ -3,7 +3,9 @@ namespace bioorm\Model;
 
 use bioorm\BioOrm, Closure, PDO, PDOException, ReflectionClass;
 use bioorm\Core\AnnotationReader;
+use bioorm\Core\ConnectionManager;
 use bioorm\Core\SchemaBuilder;
+use bioorm\Exception\ModelException;
 
 /**
  * -----------------------------------------------------------------------------
@@ -267,13 +269,16 @@ abstract class Model extends BioOrm
     public function __construct(PDO $pdo = null)
     {
         if (! $this->tableName) {
-            throw new \Exception("TableName is null in " . get_called_class());
+            throw new ModelException("TableName is null in " . get_called_class());
         }
         if (! $this->primaryKeyName) {
-            throw new \Exception("PrimaryKeyName is null in " . get_called_class());
+            throw new ModelException("PrimaryKeyName is null in " . get_called_class());
         }
         if (! $pdo) {
-                throw new \Exception("DB Alias is missing in " . get_called_class());
+            if (! $this->dbAlias){
+                throw new ModelException("DB Alias is missing in ".get_called_class());
+            }
+            $pdo =  ConnectionManager::connect($this->dbAlias);
         }
         parent::__construct($pdo, $this->primaryKeyName, $this->foreignKeyName);
         $this->table_name = $this->tableName;
@@ -346,7 +351,7 @@ abstract class Model extends BioOrm
         if ($this->isSingleRow()) {
             return $this->toArray();
         } else {
-            throw new \Exception("Can't get a valid ViewModel on non SingleRow");
+            throw new ModelException("Can't get a valid ViewModel on non SingleRow");
         }
     }
 
@@ -532,7 +537,7 @@ abstract class Model extends BioOrm
                     $modelName = $anno->get("model");
                     $model = new $modelName();
                     if (! $model instanceof Model) {
-                        throw new \Exception("Model '{$modelName}' must be an instance of :" . __CLASS__);
+                        throw new ModelException("Model '{$modelName}' must be an instance of :" . __CLASS__);
                     }
                     $where = [];
                     if (is_array($anno->get("where"))) {
